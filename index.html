@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Glow Beauty Salon</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe8f2;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #ff9ecb;
+    text-align: center;
+    padding: 20px;
+  }
+
+  header h1 {
+    margin: 0;
+    color: white;
+  }
+
+  nav {
+    background-color: #ffcce1;
+    text-align: center;
+    padding: 10px;
+  }
+
+  nav a {
+    margin: 10px;
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  h2 {
+    color: #d63384;
+  }
+
+  .service-box {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #ff73b9;
+  }
+
+  form {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #ffb3d9;
+    max-width: 350px;
+  }
+
+  input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  button {
+    background: #ff5fa2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  button:hover {
+    background: #e14e8e;
+  }
+
+  footer {
+    background-color: #ffcce1;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Glow Beauty Salon & Spa</h1>
+  <p style="color:white;">Relax • Refresh • Renew</p>
+</header>
+
+<nav>
+  <a href="#services">Services</a>
+  <a href="#booking">Book Appointment</a>
+</nav>
+
+<section id="services">
+  <h2>💆 Our Services</h2>
+
+  <div class="service-box">
+    <h3>✨ Facial Treatment</h3>
+    <p>Deep cleansing and glow facial.</p>
+    <strong>₹1499</strong>
+  </div>
+
+  <div class="service-box">
+    <h3>💖 Full Body Spa</h3>
+    <p>Relaxing massage with essential oils.</p>
+    <strong>₹2499</strong>
+  </div>
+
+  <div class="service-box">
+    <h3>💅 Manicure & Pedicure</h3>
+    <p>Scrub, shaping, and nail polish.</p>
+    <strong>₹999</strong>
+  </div>
+
+  <div class="service-box">
+    <h3>👰 Bridal Makeup</h3>
+    <p>Professional makeover for brides.</p>
+    <strong>Price on request</strong>
+  </div>
+</section>
+
+<section id="booking">
+  <h2>🗓 Book an Appointment</h2>
+  <p>Fill the form below and we will confirm soon.</p>
+
+  <form>
+    <label>Full Name:</label>
+    <input type="text" required>
+
+    <label>Phone Number:</label>
+    <input type="text" required>
+
+    <label>Select Service:</label>
+    <select required>
+      <option>Facial Treatment</option>
+      <option>Body Spa</option>
+      <option>Manicure & Pedicure</option>
+      <option>Bridal Makeup</option>
+    </select>
+
+    <label>Date:</label>
+    <input type="date" required>
+
+    <label>Time:</label>
+    <input type="time" required>
+
+    <button>Book Now</button>
+  </form>
+</section>
+
+<footer>
+  © 2025 Glow Beauty Salon | Contact: +91 98765 43210
+</footer>
+
+</body>
+</html>
