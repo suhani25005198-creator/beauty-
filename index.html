@@ -1,100 +1,402 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glow Beauty Salon</title>
 
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #ffe8f2;
-    margin: 0;
-    padding: 0;
+  /* CSS Variables for Light/Dark Mode */
+  :root {
+    --bg-primary: #ffe8f2;
+    --bg-secondary: #ff9ecb;
+    --bg-nav: #ffcce1;
+    --text-primary: #444;
+    --text-heading: #d63384;
+    --card-bg: white;
+    --border-accent: #ff73b9;
+    --btn-bg: #ff5fa2;
+    --btn-hover: #e14e8e;
+    --footer-bg: #ffcce1;
+    --gradient-1: #ff9ecb;
+    --gradient-2: #ffb3d9;
+    --gradient-3: #ffe8f2;
   }
 
+  .dark-mode {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-nav: #0f3460;
+    --text-primary: #eaeaea;
+    --text-heading: #ff73b9;
+    --card-bg: #16213e;
+    --border-accent: #e94560;
+    --btn-bg: #e94560;
+    --btn-hover: #ff6b6b;
+    --footer-bg: #0f3460;
+    --gradient-1: #0f3460;
+    --gradient-2: #16213e;
+    --gradient-3: #1a1a2e;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-2));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    color: var(--text-primary);
+  }
+
+  /* Animated Gradient Background */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Header Animation */
   header {
-    background-color: #ff9ecb;
+    background: linear-gradient(135deg, var(--bg-secondary), var(--border-accent));
     text-align: center;
-    padding: 20px;
+    padding: 30px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   header h1 {
-    margin: 0;
     color: white;
+    font-size: 2.5em;
+    animation: fadeInDown 1s ease;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
   }
 
+  header p {
+    color: white;
+    animation: fadeInUp 1s ease 0.3s both;
+    letter-spacing: 3px;
+  }
+
+  /* Fade Animations */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Navigation */
   nav {
-    background-color: #ffcce1;
+    background-color: var(--bg-nav);
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
   nav a {
-    margin: 10px;
     text-decoration: none;
-    color: #444;
+    color: var(--text-primary);
     font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
 
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+  }
+
+  nav a:hover::before {
+    left: 100%;
+  }
+
+  nav a:hover {
+    background-color: var(--btn-bg);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  /* Dark Mode Toggle */
+  .theme-toggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-accent);
+    border-radius: 50px;
+    padding: 8px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(233, 69, 96, 0.3);
+  }
+
+  .theme-toggle .icon {
+    font-size: 18px;
+  }
+
+  /* Sections */
   section {
-    padding: 20px;
+    padding: 30px 20px;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   h2 {
-    color: #d63384;
+    color: var(--text-heading);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    animation: fadeInLeft 0.8s ease;
   }
 
+  /* Service Cards with Animation */
   .service-box {
-    background: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-left: 5px solid #ff73b9;
-  }
-
-  form {
-    background: white;
+    background: var(--card-bg);
     padding: 20px;
-    border-radius: 5px;
-    border: 2px solid #ffb3d9;
-    max-width: 350px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--border-accent);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    animation: slideIn 0.6s ease forwards;
+    position: relative;
+    overflow: hidden;
   }
 
-  input, select, button {
+  .service-box:nth-child(1) { animation-delay: 0.1s; }
+  .service-box:nth-child(2) { animation-delay: 0.2s; }
+  .service-box:nth-child(3) { animation-delay: 0.3s; }
+  .service-box:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .service-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, var(--border-accent) 0%, transparent 70%);
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  .service-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(255, 115, 185, 0.3);
+    border-left-width: 8px;
+  }
+
+  .service-box h3 {
+    color: var(--text-heading);
+    margin-bottom: 8px;
+  }
+
+  .service-box strong {
+    color: var(--btn-bg);
+    font-size: 1.2em;
+  }
+
+  /* Form Styling */
+  form {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid var(--border-accent);
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: fadeInUp 0.8s ease;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--text-heading);
+  }
+
+  input, select {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
     margin-top: 8px;
+    border: 2px solid var(--border-accent);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--btn-bg);
+    box-shadow: 0 0 15px rgba(255, 95, 162, 0.3);
+    transform: scale(1.02);
   }
 
   button {
-    background: #ff5fa2;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--btn-bg), var(--border-accent));
     border: none;
     color: white;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  button:hover::before {
+    width: 300px;
+    height: 300px;
   }
 
   button:hover {
-    background: #e14e8e;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 95, 162, 0.4);
   }
 
+  /* Footer */
   footer {
-    background-color: #ffcce1;
+    background: linear-gradient(135deg, var(--footer-bg), var(--bg-nav));
     text-align: center;
-    padding: 10px;
-    margin-top: 20px;
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  /* Floating Particles Animation */
+  .particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--border-accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 15s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Sparkle effect on hover for service icons */
+  .service-box h3 {
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .service-box:hover h3 {
+    animation: sparkle 0.5s ease;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
 </style>
 </head>
 
 <body>
 
+<!-- Floating Particles -->
+<div class="particles" id="particles"></div>
+
 <header>
-  <h1>Glow Beauty Salon & Spa</h1>
-  <p style="color:white;">Relax • Refresh • Renew</p>
+  <h1>✨ Glow Beauty Salon & Spa ✨</h1>
+  <p>Relax • Refresh • Renew</p>
 </header>
 
 <nav>
   <a href="#services">Services</a>
   <a href="#booking">Book Appointment</a>
+  <button class="theme-toggle" id="themeToggle">
+    <span class="icon" id="themeIcon">🌙</span>
+    <span id="themeText">Dark</span>
+  </button>
 </nav>
 
 <section id="services">
@@ -102,25 +404,25 @@
 
   <div class="service-box">
     <h3>✨ Facial Treatment</h3>
-    <p>Deep cleansing and glow facial.</p>
+    <p>Deep cleansing and glow facial for radiant skin.</p>
     <strong>₹1499</strong>
   </div>
 
   <div class="service-box">
     <h3>💖 Full Body Spa</h3>
-    <p>Relaxing massage with essential oils.</p>
+    <p>Relaxing massage with premium essential oils.</p>
     <strong>₹2499</strong>
   </div>
 
   <div class="service-box">
     <h3>💅 Manicure & Pedicure</h3>
-    <p>Scrub, shaping, and nail polish.</p>
+    <p>Scrub, shaping, and designer nail polish.</p>
     <strong>₹999</strong>
   </div>
 
   <div class="service-box">
     <h3>👰 Bridal Makeup</h3>
-    <p>Professional makeover for brides.</p>
+    <p>Professional HD makeover for your special day.</p>
     <strong>Price on request</strong>
   </div>
 </section>
@@ -129,15 +431,16 @@
   <h2>🗓 Book an Appointment</h2>
   <p>Fill the form below and we will confirm soon.</p>
 
-  <form>
+  <form id="bookingForm">
     <label>Full Name:</label>
-    <input type="text" required>
+    <input type="text" id="name" placeholder="Enter your name" required>
 
     <label>Phone Number:</label>
-    <input type="text" required>
+    <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required>
 
     <label>Select Service:</label>
-    <select required>
+    <select id="service" required>
+      <option value="">-- Choose a Service --</option>
       <option>Facial Treatment</option>
       <option>Body Spa</option>
       <option>Manicure & Pedicure</option>
@@ -145,18 +448,146 @@
     </select>
 
     <label>Date:</label>
-    <input type="date" required>
+    <input type="date" id="date" required>
 
     <label>Time:</label>
-    <input type="time" required>
+    <input type="time" id="time" required>
 
-    <button>Book Now</button>
+    <button type="submit">✨ Book Now ✨</button>
   </form>
 </section>
 
 <footer>
   © 2025 Glow Beauty Salon | Contact: +91 98765 43210
 </footer>
+
+<script>
+  // Dark/Light Mode Toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.getElementById('themeText');
+  const body = document.body;
+
+  // Check for saved theme preference or default to light
+  let darkMode = localStorage.getItem('darkMode') === 'true';
+
+  // Apply saved theme on load
+  if (darkMode) {
+    body.classList.add('dark-mode');
+    themeIcon.textContent = '☀️';
+    themeText.textContent = 'Light';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    darkMode = !darkMode;
+    body.classList.toggle('dark-mode');
+    
+    if (darkMode) {
+      themeIcon.textContent = '☀️';
+      themeText.textContent = 'Light';
+    } else {
+      themeIcon.textContent = '🌙';
+      themeText.textContent = 'Dark';
+    }
+    
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', darkMode);
+  });
+
+  // Create Floating Particles
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 15;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = Math.random() * 15 + 5 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.animationDuration = Math.random() * 15 + 10 + 's';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  createParticles();
+
+  // Form Submission Animation
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const btn = this.querySelector('button');
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '🎉 Booking Confirmed!';
+    btn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+    
+    // Add confetti effect
+    createConfetti();
+    
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.style.background = '';
+      this.reset();
+    }, 3000);
+  });
+
+  // Confetti Effect
+  function createConfetti() {
+    const colors = ['#ff73b9', '#ffb3d9', '#ff5fa2', '#ffd700', '#ff6b6b'];
+    
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.style.cssText = `
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        left: ${Math.random() * 100}%;
+        top: -10px;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+        z-index: 1000;
+        pointer-events: none;
+        animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+      `;
+      document.body.appendChild(confetti);
+      
+      setTimeout(() => confetti.remove(), 5000);
+    }
+  }
+
+  // Add confetti animation keyframes dynamically
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes confettiFall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Scroll Animation for Service Boxes
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateX(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.service-box').forEach(box => {
+    observer.observe(box);
+  });
+</script>
 
 </body>
 </html>
